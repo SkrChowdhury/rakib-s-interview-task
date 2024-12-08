@@ -8,11 +8,11 @@ export default function HomeScreen() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isInsideGeofence, setIsInsideGeofence] = useState(false);
 
-  const geofenceRegion = { // Define your geofence region here
-    latitude: 37.78825, // Replace with your desired latitude
-    longitude: -122.4324, // Replace with your desired longitude
-    latitudeDelta: 0.005, // Adjust based on your geofence size
-    longitudeDelta: 0.005, // Adjust based on your geofence size
+  const geofenceRegion = { 
+    latitude: 37.78825, 
+    longitude: -122.4324, 
+    latitudeDelta: 0.005, 
+    longitudeDelta: 0.005, 
   };
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function HomeScreen() {
       try {
         const { coords } = await Location.getCurrentPositionAsync({});
         setLocation(coords);
-        checkGeofence(coords); // Check geofence on location update
+        checkGeofence(coords); 
       } catch (error) {
         setErrorMessage(error.message);
       }
@@ -39,12 +39,11 @@ export default function HomeScreen() {
     return () => Location.removeWatchPositionAsync(watchPositionId); // Cleanup on unmount
   }, []);
 
-/*************  ✨ Codeium Command ⭐  *************/
-/******  41ef1f1a-bd8e-4dab-a96e-adb29c985029  *******/
+
   const checkGeofence = async (coords) => {
     const isWithin = isPointInRegion(coords, geofenceRegion);
     setIsInsideGeofence(isWithin);
-    // Trigger your desired actions here based on isWithin (entering or exiting)
+    
   };
 
   const isPointInRegion = (point, region) => {
