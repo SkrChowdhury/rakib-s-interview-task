@@ -63,15 +63,28 @@ export default function HomeScreen() {
     }
   };
 
+
+ 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} showsUserLocation={true} mapType="hybrid">
-        {errorMessage && <Text>Error: {errorMessage}</Text>}
-        {location && (
-          <Marker coordinate={location} title="Your Location" />
-        )}
-        {!location && !errorMessage && <Text>Loading location...</Text>}
-      </MapView>
+<MapView style={styles.map} showsUserLocation={true} mapType="hybrid">
+      {errorMessage && <Text>Error: {errorMessage}</Text>}
+      
+      {location && (
+        <Marker coordinate={location} title="Your Location" />
+      )}
+      <Marker
+          coordinate={{
+            latitude: 37.78825, 
+    longitude: -122.4324,
+          }}
+          title="My Location"
+          description="This is a marker in San Francisco"
+        />
+
+      {!location && !errorMessage && <Text>Loading location...</Text>}
+    </MapView>
+
 
       <Text>
         {isInsideGeofence ? 'Inside Geofence' : 'Outside Geofence'}
